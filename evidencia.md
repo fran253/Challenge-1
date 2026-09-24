@@ -1,1 +1,30 @@
-export AWS_ACCESS_KEY_ID="" export AWS_SECRET_ACCESS_KEY="" export AWS_SESSION_TOKEN="" export AWS_REGION="us-east-1" export AWS_DEFAULT_REGION="us-east-1" terraform init terraform apply aws s3 ls aws s3 website s3://bucket-challenge-fran-1/ --index-document index.html aws s3api put-public-access-block --bucket bucket-challenge-fran-1 --public-access-block-configuration "BlockPublicAcls=false,IgnorePublicAcls=false,BlockPublicPolicy=false,RestrictPublicBuckets=false" cat < policy.json { "Version": "2012-10-17", "Statement": [ { "Sid": "PublicReadGetObject", "Effect": "Allow", "Principal": "", "Action": "s3:GetObject", "Resource": "arn:aws:s3:::bucket-challenge-fran-1/" } ] } EOF aws s3api put-bucket-policy --bucket bucket-challenge-fran-1 --policy file://policy.json aws s3 sync . s3://bucket-challenge-fran-1/ history
+export AWS_ACCESS_KEY_ID=""
+export AWS_SECRET_ACCESS_KEY=""
+export AWS_SESSION_TOKEN=""
+export AWS_REGION="us-east-1"
+export AWS_DEFAULT_REGION="us-east-1"
+terraform init
+terraform apply
+aws s3 ls
+aws s3 website s3://bucket-challenge-fran-1/ --index-document index.html
+aws s3api put-public-access-block --bucket bucket-challenge-fran-1 --public-access-block-configuration "BlockPublicAcls=false,IgnorePublicAcls=false,BlockPublicPolicy=false,RestrictPublicBuckets=false"
+cat <<EOF > policy.json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PublicReadGetObject",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::bucket-challenge-fran-1/*"
+    }
+  ]
+}
+EOF
+aws s3api put-bucket-policy --bucket bucket-challenge-fran-1 --policy file://policy.json
+aws s3 sync . s3://bucket-challenge-fran-1/
+history
+
+
+http://bucket-challenge-fran-1.s3-website-us-east-1.amazonaws.com/
