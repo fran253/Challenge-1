@@ -1,27 +1,16 @@
-export AWS_REGION="us-east-1"
-export AWS_DEFAULT_REGION="us-east-1"
-terraform init
-terraform apply
-aws s3 ls
-aws s3 website s3://bucket-challenge-fran-1/ --index-document index.html
-aws s3api put-public-access-block --bucket bucket-challenge-fran-1 --public-access-block-configuration "BlockPublicAcls=false,IgnorePublicAcls=false,BlockPublicPolicy=false,RestrictPublicBuckets=false"
-cat <<EOF > policy.json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "PublicReadGetObject",
-      "Effect": "Allow",
-      "Principal": "*",
-      "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::bucket-challenge-fran-1/*"
-    }
-  ]
-}
-EOF
-aws s3api put-bucket-policy --bucket bucket-challenge-fran-1 --policy file://policy.json
-aws s3 sync . s3://bucket-challenge-fran-1/
-history
+# Challenge: Web de Hoteles en S3 con Terraform
 
+Despliegue automatizado de una página web estática de hoteles utilizando Amazon S3 y Terraform.
 
-http://bucket-challenge-fran-1.s3-website-us-east-1.amazonaws.com/
+## Estructura del Proyecto
+- `index.html`: Página principal de la web de hoteles.
+- `styles.css`: Hojas de estilo personalizadas.
+- `app.js`: Lógica interactiva de JavaScript.
+- `main.tf`: Configuración de infraestructura como código (Terraform) para S3, políticas públicas y hosting web estático.
+- `evidencia.md`: Registro de comandos de consola.
+- `web.txt`: Endpoint público del sitio web.
+
+## Pasos para el Despliegue
+1. Configurar las credenciales de AWS en el entorno de terminal.
+2. Ejecutar `terraform init` para inicializar los proveedores.
+3. Ejecutar `terraform apply -auto-approve` para crear la infraestructura y subir los archivos estáticos automáticamente.
