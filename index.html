@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paraíso Resort & Hotels | Reserva tus Vacaciones</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 font-sans text-slate-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-hotel text-blue-600 text-2xl"></i>
+                <span class="text-xl font-bold tracking-tight text-slate-900">Paraíso<span class="text-blue-600">Hotels</span></span>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="#" class="text-blue-600">Inicio</a>
+                <a href="#destinos" class="hover:text-blue-600 transition">Destinos</a>
+                <a href="#ofertas" class="hover:text-blue-600 transition">Ofertas</a>
+                <a href="#contacto" class="hover:text-blue-600 transition">Ayuda</a>
+            </nav>
+            <button onclick="alert('Inicia sesión para ver tus reservas.');" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">Mi Cuenta</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-blue-900 text-white py-24 px-4">
+        <div class="absolute inset-0 overflow-hidden opacity-40">
+            <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1920&q=80" alt="Hotel Background" class="w-full h-full object-cover">
+        </div>
+        <div class="relative max-w-4xl mx-auto text-center space-y-6">
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Descubre tu próximo destino soñado</h1>
+            <p class="text-lg text-blue-100">Reserva hoteles de lujo al mejor precio garantizado.</p>
+            
+            <!-- Buscador Rápido -->
+            <div class="bg-white p-4 rounded-2xl shadow-xl text-slate-800 grid grid-cols-1 md:grid-cols-4 gap-3 text-left">
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase">Destino</label>
+                    <input type="text" id="searchInput" placeholder="¿A dónde viajas?" class="w-full mt-1 border rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase">Llegada</label>
+                    <input type="date" class="w-full mt-1 border rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase">Salida</label>
+                    <input type="date" class="w-full mt-1 border rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div class="flex items-end">
+                    <button onclick="buscarHotel()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg text-sm transition">Buscar Hoteles</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Listado de Hoteles -->
+    <main id="destinos" class="max-w-7xl mx-auto px-4 py-16">
+        <h2 class="text-2xl font-bold mb-8">Hoteles Destacados</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="hotelGrid">
+            <!-- Hotel 1 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80" alt="Grand Plaza" class="w-full h-48 object-cover">
+                <div class="p-5 space-y-3">
+                    <div class="flex justify-between items-start">
+                        <h3 class="font-bold text-lg">Grand Plaza Resort</h3>
+                        <span class="bg-blue-50 text-blue-600 text-xs font-bold px-2.5 py-1 rounded-full">4.8 ⭐</span>
+                    </div>
+                    <p class="text-slate-500 text-sm"><i class="fa-solid fa-location-dot text-red-500 mr-1"></i> Cancún, México</p>
+                    <div class="flex justify-between items-center pt-2 border-t">
+                        <div><span class="text-xl font-extrabold text-blue-600">$120</span> <span class="text-xs text-slate-400">/ noche</span></div>
+                        <button onclick="reservar('Grand Plaza Resort', 120)" class="bg-slate-900 text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-blue-600 transition">Reservar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotel 2 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition">
+                <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80" alt="Alpine Lodge" class="w-full h-48 object-cover">
+                <div class="p-5 space-y-3">
+                    <div class="flex justify-between items-start">
+                        <h3 class="font-bold text-lg">Alpine Snow Lodge</h3>
+                        <span class="bg-blue-50 text-blue-600 text-xs font-bold px-2.5 py-1 rounded-full">4.9 ⭐</span>
+                    </div>
+                    <p class="text-slate-500 text-sm"><i class="fa-solid fa-location-dot text-red-500 mr-1"></i> Zermatt, Suiza</p>
+                    <div class="flex justify-between items-center pt-2 border-t">
+                        <div><span class="text-xl font-extrabold text-blue-600">$210</span> <span class="text-xs text-slate-400">/ noche</span></div>
+                        <button onclick="reservar('Alpine Snow Lodge', 210)" class="bg-slate-900 text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-blue-600 transition">Reservar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotel 3 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition">
+                <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=600&q=80" alt="Urban Boutique" class="w-full h-48 object-cover">
+                <div class="p-5 space-y-3">
+                    <div class="flex justify-between items-start">
+                        <h3 class="font-bold text-lg">Urban Boutique Hotel</h3>
+                        <span class="bg-blue-50 text-blue-600 text-xs font-bold px-2.5 py-1 rounded-full">4.6 ⭐</span>
+                    </div>
+                    <p class="text-slate-500 text-sm"><i class="fa-solid fa-location-dot text-red-500 mr-1"></i> Barcelona, España</p>
+                    <div class="flex justify-between items-center pt-2 border-t">
+                        <div><span class="text-xl font-extrabold text-blue-600">$95</span> <span class="text-xs text-slate-400">/ noche</span></div>
+                        <button onclick="reservar('Urban Boutique Hotel', 95)" class="bg-slate-900 text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-blue-600 transition">Reservar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-20 py-8 text-center text-sm text-slate-500">
+        <p>&copy; 2026 Paraíso Hotels. Alojado en AWS S3 mediante Terraform.</p>
+    </footer>
+
+    <script>
+        function buscarHotel() {
+            const query = document.getElementById('searchInput').value;
+            alert("Buscando disponibilidad para: " + (query ? query : "Todos los destinos"));
+        }
+        function reservar(hotel, precio) {
+            alert("¡Has seleccionado " + hotel + "! El precio por noche es $" + precio + ".");
+        }
+    </script>
+</body>
+</html>
